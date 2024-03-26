@@ -22,6 +22,12 @@ pub fn build(b: *std.Build) void {
         .optimize = optimize,
     });
 
+    // Incudes the raylib-zig module
+    const raylib_zig = b.addModule("raylib_zig", .{
+        .source_file = .{ .path = "raylib-zig/src/main.zig" },
+    });
+    exe.addModule("raylib_zig", raylib_zig);
+
     exe.linkSystemLibrary("raylib");
     exe.linkSystemLibrary("c");
 

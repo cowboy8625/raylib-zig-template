@@ -1,5 +1,5 @@
 const std = @import("std");
-const rl = @cImport(@cInclude("raylib.h"));
+const rl = @import("raylib_zig");
 
 pub fn main() !void {
     const screen_width = 800;
@@ -11,20 +11,19 @@ pub fn main() !void {
 
     while (!rl.WindowShouldClose()) {
         rl.BeginDrawing();
-        rl.ClearBackground(rl.RAYWHITE);
+        rl.ClearBackground(rl.Color.rayWhite());
         const text = "Hello, World";
         const text_dim = rl.MeasureTextEx(rl.GetFontDefault(), text, 20, 1);
-        // zig fmt: off
         rl.DrawTextEx(
             rl.GetFontDefault(),
             "Hello, World",
             .{
                 .x = screen_width / 2 - text_dim.x / 2,
-                .y = screen_height / 2 - text_dim.y / 2
+                .y = screen_height / 2 - text_dim.y / 2,
             },
             20,
             2,
-            rl.DARKGRAY
+            rl.Color.DarkGray(),
         );
         defer rl.EndDrawing();
     }
