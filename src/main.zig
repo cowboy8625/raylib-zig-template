@@ -23,7 +23,7 @@ pub fn main() !void {
             },
             20,
             2,
-            rl.Color.DarkGray(),
+            rl.Color.darkGray(),
         );
         defer rl.EndDrawing();
     }
