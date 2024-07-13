@@ -17,14 +17,14 @@ pub fn build(b: *std.Build) void {
 
     const exe = b.addExecutable(.{
         .name = "raylib-zig-template",
-        .root_source_file = .{ .path = "src/main.zig" },
+        .root_source_file = b.path("src/main.zig"),
         .target = target,
         .optimize = optimize,
     });
 
     // Incudes the raylib-zig module
     const raylib_zig = b.addModule("raylib_zig", .{
-        .root_source_file = .{ .path = "raylib_zig/src/root.zig" },
+        .root_source_file = b.path("raylib_zig/src/root.zig"),
     });
     exe.root_module.addImport("raylib_zig", raylib_zig);
 
@@ -60,7 +60,7 @@ pub fn build(b: *std.Build) void {
     run_step.dependOn(&run_cmd.step);
 
     const exe_unit_tests = b.addTest(.{
-        .root_source_file = .{ .path = "src/main.zig" },
+        .root_source_file = b.path("src/main.zig"),
         .target = target,
         .optimize = optimize,
     });
