@@ -22,14 +22,12 @@ pub fn build(b: *std.Build) void {
         .optimize = optimize,
     });
 
-    // Incudes the raylib-zig module
-    const raylib_zig = b.addModule("raylib_zig", .{
-        .root_source_file = b.path("raylib_zig/src/root.zig"),
+    // Incudes the raylib_zig module
+    const raylib_dep = b.dependency("raylib_zig", .{
+        .target = target,
+        .optimize = optimize,
     });
-    exe.root_module.addImport("raylib_zig", raylib_zig);
-
-    exe.linkSystemLibrary("raylib");
-    exe.linkSystemLibrary("c");
+    exe.linkLibrary(raylib_dep.artifact("raylib_zig"));
 
     // This declares intent for the executable to be installed into the
     // standard location when the user invokes the "install" step (the default
